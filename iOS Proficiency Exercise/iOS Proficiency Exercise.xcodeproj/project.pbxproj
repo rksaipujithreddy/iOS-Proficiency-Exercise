@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		A993B86124A6342300A7493D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86024A6342300A7493D /* AppDelegate.swift */; };
 		A993B86324A6342300A7493D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86224A6342300A7493D /* SceneDelegate.swift */; };
-		A993B86524A6342300A7493D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86424A6342300A7493D /* ViewController.swift */; };
-		A993B86824A6342300A7493D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A993B86624A6342300A7493D /* Main.storyboard */; };
+		A993B86524A6342300A7493D /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86424A6342300A7493D /* DashboardViewController.swift */; };
 		A993B86A24A6342400A7493D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A993B86924A6342400A7493D /* Assets.xcassets */; };
 		A993B86D24A6342400A7493D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A993B86B24A6342400A7493D /* LaunchScreen.storyboard */; };
 		A993B87824A6342400A7493D /* iOS_Proficiency_ExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B87724A6342400A7493D /* iOS_Proficiency_ExerciseTests.swift */; };
 		A993B88324A6342400A7493D /* iOS_Proficiency_ExerciseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B88224A6342400A7493D /* iOS_Proficiency_ExerciseUITests.swift */; };
+		A993B89524A64D0A00A7493D /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B89424A64D0A00A7493D /* DashboardTableViewCell.swift */; };
+		A993B89924A65B0200A7493D /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B89824A65B0200A7493D /* ServiceManager.swift */; };
+		A993B89D24A65D3100A7493D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B89C24A65D3100A7493D /* Constants.swift */; };
+		A993B89F24A65EE700A7493D /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B89E24A65EE700A7493D /* DashboardModel.swift */; };
+		A993B8A124A6617300A7493D /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B8A024A6617300A7493D /* DashboardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +42,7 @@
 		A993B85D24A6342300A7493D /* iOS Proficiency Exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Proficiency Exercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A993B86024A6342300A7493D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A993B86224A6342300A7493D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A993B86424A6342300A7493D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A993B86724A6342300A7493D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A993B86424A6342300A7493D /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A993B86924A6342400A7493D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A993B86C24A6342400A7493D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A993B86E24A6342400A7493D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +52,11 @@
 		A993B87E24A6342400A7493D /* iOS Proficiency ExerciseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Proficiency ExerciseUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A993B88224A6342400A7493D /* iOS_Proficiency_ExerciseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Proficiency_ExerciseUITests.swift; sourceTree = "<group>"; };
 		A993B88424A6342400A7493D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A993B89424A64D0A00A7493D /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
+		A993B89824A65B0200A7493D /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		A993B89C24A65D3100A7493D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A993B89E24A65EE700A7493D /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
+		A993B8A024A6617300A7493D /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +107,13 @@
 		A993B85F24A6342300A7493D /* iOS Proficiency Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				A993B89B24A65C0800A7493D /* Constants */,
+				A993B89A24A65BF800A7493D /* Service */,
+				A993B89724A65A8400A7493D /* Model */,
+				A993B89624A65A4B00A7493D /* ViewModel */,
+				A993B89324A64B5E00A7493D /* View */,
 				A993B86024A6342300A7493D /* AppDelegate.swift */,
 				A993B86224A6342300A7493D /* SceneDelegate.swift */,
-				A993B86424A6342300A7493D /* ViewController.swift */,
-				A993B86624A6342300A7493D /* Main.storyboard */,
 				A993B86924A6342400A7493D /* Assets.xcassets */,
 				A993B86B24A6342400A7493D /* LaunchScreen.storyboard */,
 				A993B86E24A6342400A7493D /* Info.plist */,
@@ -126,6 +137,47 @@
 				A993B88424A6342400A7493D /* Info.plist */,
 			);
 			path = "iOS Proficiency ExerciseUITests";
+			sourceTree = "<group>";
+		};
+		A993B89324A64B5E00A7493D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A993B86424A6342300A7493D /* DashboardViewController.swift */,
+				A993B89424A64D0A00A7493D /* DashboardTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A993B89624A65A4B00A7493D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A993B8A024A6617300A7493D /* DashboardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A993B89724A65A8400A7493D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A993B89E24A65EE700A7493D /* DashboardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A993B89A24A65BF800A7493D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A993B89824A65B0200A7493D /* ServiceManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		A993B89B24A65C0800A7493D /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A993B89C24A65D3100A7493D /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +286,6 @@
 			files = (
 				A993B86D24A6342400A7493D /* LaunchScreen.storyboard in Resources */,
 				A993B86A24A6342400A7493D /* Assets.xcassets in Resources */,
-				A993B86824A6342300A7493D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +310,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A993B86524A6342300A7493D /* ViewController.swift in Sources */,
+				A993B89F24A65EE700A7493D /* DashboardModel.swift in Sources */,
+				A993B89924A65B0200A7493D /* ServiceManager.swift in Sources */,
+				A993B86524A6342300A7493D /* DashboardViewController.swift in Sources */,
+				A993B8A124A6617300A7493D /* DashboardViewModel.swift in Sources */,
 				A993B86124A6342300A7493D /* AppDelegate.swift in Sources */,
 				A993B86324A6342300A7493D /* SceneDelegate.swift in Sources */,
+				A993B89D24A65D3100A7493D /* Constants.swift in Sources */,
+				A993B89524A64D0A00A7493D /* DashboardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +353,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A993B86624A6342300A7493D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A993B86724A6342300A7493D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A993B86B24A6342400A7493D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
