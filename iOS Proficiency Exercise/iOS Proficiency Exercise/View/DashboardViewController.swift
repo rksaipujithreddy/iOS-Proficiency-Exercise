@@ -102,8 +102,10 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.selectionStyle = .none
         if dashboardData?.rowValue?[indexPath.row].titleValue != nil {
-            cell.lblTitle.text = dashboardData?.rowValue?[indexPath.row].titleValue?.uppercased()
-            cell.lblDescription.text = dashboardData?.rowValue?[indexPath.row].descriptionValue
+            
+        let dashViewModel = DashboardViewModel(model:(dashboardData?.rowValue?[indexPath.row])!)
+            cell.displayDataInCell(using: dashViewModel)
+           
         } else {
             cell.viewCellBg.removeFromSuperview()
         }

@@ -99,4 +99,11 @@ class DashboardTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    func displayDataInCell(using viewModel: DashboardViewModel) {
+    lblTitle.text = viewModel.title
+    lblDescription.text = viewModel.description
+    imgDisplay.loadImageUsingCacheWithURLString(viewModel.imageURL, placeHolder: nil) { (bool) in
+        //perform actions if needed
+    }
+    }
 }

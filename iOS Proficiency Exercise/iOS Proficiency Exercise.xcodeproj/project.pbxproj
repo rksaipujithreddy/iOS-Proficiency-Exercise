@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9333B1B24A6DE92006D301B /* ImageCachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9333B1A24A6DE92006D301B /* ImageCachable.swift */; };
 		A993B86124A6342300A7493D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86024A6342300A7493D /* AppDelegate.swift */; };
 		A993B86324A6342300A7493D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86224A6342300A7493D /* SceneDelegate.swift */; };
 		A993B86524A6342300A7493D /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86424A6342300A7493D /* DashboardViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A9333B1A24A6DE92006D301B /* ImageCachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCachable.swift; sourceTree = "<group>"; };
 		A993B85D24A6342300A7493D /* iOS Proficiency Exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Proficiency Exercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A993B86024A6342300A7493D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A993B86224A6342300A7493D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9333B1924A6DE7B006D301B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				A9333B1A24A6DE92006D301B /* ImageCachable.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		A993B85424A6342300A7493D = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +117,7 @@
 		A993B85F24A6342300A7493D /* iOS Proficiency Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				A9333B1924A6DE7B006D301B /* New Group */,
 				A993B89B24A65C0800A7493D /* Constants */,
 				A993B89A24A65BF800A7493D /* Service */,
 				A993B89724A65A8400A7493D /* Model */,
@@ -314,6 +325,7 @@
 				A993B89924A65B0200A7493D /* ServiceManager.swift in Sources */,
 				A993B86524A6342300A7493D /* DashboardViewController.swift in Sources */,
 				A993B8A124A6617300A7493D /* DashboardViewModel.swift in Sources */,
+				A9333B1B24A6DE92006D301B /* ImageCachable.swift in Sources */,
 				A993B86124A6342300A7493D /* AppDelegate.swift in Sources */,
 				A993B86324A6342300A7493D /* SceneDelegate.swift in Sources */,
 				A993B89D24A65D3100A7493D /* Constants.swift in Sources */,

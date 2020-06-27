@@ -8,23 +8,15 @@
 
 import Foundation
 
-class DashboardViewModel {
+struct DashboardViewModel {
     
-    //MARK:- getDashboardData API Service call
-    func getDashboardData()-> DashboardModel{
-        var dashboardData: DashboardModel?
-        ServiceManager.sharedInstance.getData(baseURL: Constants.ConfigurationItems.serverURL, onSuccess: { data in
-//            DispatchQueue.main.async {
-                do {
-                    let jsonDecoder = JSONDecoder()
-                    dashboardData = try jsonDecoder.decode(DashboardModel.self, from: data)
-                } catch {
-                }
-//            }
-        }, onFailure: { error in
-        })
-        return dashboardData!
+    let title: String
+    let imageURL: String
+    let description: String
+
+    init(model: DashboardDetailsModel) {
+        self.title = model.titleValue?.uppercased() ?? ""
+        self.imageURL = model.imageReferenceValue ?? ""
+        self.description = model.descriptionValue ?? ""
     }
-    
-    
 }
