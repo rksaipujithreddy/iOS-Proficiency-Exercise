@@ -11,7 +11,8 @@ import UIKit
 class DashboardTableViewCell: UITableViewCell {
     
     var imageWidthAnchor:NSLayoutConstraint!
-    
+    var imageHeightAnchor:NSLayoutConstraint!
+
      lazy var viewCellBg: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -39,8 +40,8 @@ class DashboardTableViewCell: UITableViewCell {
     }()
      lazy var imgDisplay: UIImageView = {
         let img = UIImageView()
-        img.backgroundColor = UIColor.black
-        img.contentMode = .scaleToFill // without this your image will shrink and looks ugly
+        img.backgroundColor = UIColor.clear
+        img.contentMode = .scaleAspectFit // without this your image will shrink and looks ugly
         img.translatesAutoresizingMaskIntoConstraints = false
         img.clipsToBounds = true
         return img
@@ -76,15 +77,16 @@ class DashboardTableViewCell: UITableViewCell {
         viewCellBg.addSubview(lblDescription)
         NSLayoutConstraint.activate([
             
-            imgDisplay.heightAnchor.constraint(equalToConstant: constantWH),
             imgDisplay.leftAnchor.constraint(equalTo: viewCellBg.leftAnchor, constant:20 ),
             imgDisplay.centerYAnchor.constraint(equalTo:lblTitle.centerYAnchor)
         ])
-        imageWidthAnchor =  imgDisplay.widthAnchor.constraint(equalToConstant: constantWH)
-        imageWidthAnchor.isActive = true
+            self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: constantWH)
+            self.imageWidthAnchor.isActive = true
+        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant: constantWH)
+        self.imageHeightAnchor.isActive = true
         
         NSLayoutConstraint.activate([
-            lblTitle.leadingAnchor.constraint(equalTo:imgDisplay.trailingAnchor,constant: 8),
+            lblTitle.leadingAnchor.constraint(equalTo:imgDisplay.trailingAnchor,constant:-10),
             lblTitle.topAnchor.constraint(equalTo:viewCellBg.topAnchor,constant: 10),
             lblTitle.trailingAnchor.constraint(equalTo:viewCellBg.trailingAnchor),
             lblTitle.heightAnchor.constraint(equalToConstant:constantWH)
@@ -114,11 +116,37 @@ class DashboardTableViewCell: UITableViewCell {
     func  displayDataInCell(using viewModel: DashboardViewModel) {
         lblTitle.text = viewModel.title
         lblDescription.text = viewModel.description
-        
-        imgDisplay.loadImageUsingCacheWithURLString(viewModel.imageURL, placeHolder: nil) { (bool) in
-            //perform actions if needed
-        }
-        print(imgDisplay.image?.pngData())
+        imageWidthAnchor.isActive = false
+        imageHeightAnchor.isActive = false
 
+        if(!viewModel.imageURL.isEmpty){
+            imgDisplay.loadImageUsingCacheWithURLString(viewModel.imageURL, placeHolder: nil) { (bool) in
+                       print(bool)
+                if(bool){
+                    DispatchQueue.main.async {
+                    self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: (self.contentView.frame.size.width/4))
+                      self.imageWidthAnchor.isActive = true
+                        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant: (self.contentView.frame.size.width/4))
+                          self.imageHeightAnchor.isActive = true
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                    self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: 0)
+                    self.imageWidthAnchor.isActive = true
+                        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant:0)
+                        self.imageHeightAnchor.isActive = true
+                    }
+                    
+                }
+                   }            
+        }
+        else{
+            DispatchQueue.main.async {
+                self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: 0)
+                self.imageWidthAnchor.isActive = true
+                self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant:0)
+                self.imageHeightAnchor.isActive = true
+            }
+        }
     }
 }

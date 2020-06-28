@@ -32,35 +32,43 @@ extension ImageCachable where Self: UIImageView {
                 completion(true)
             }
             return
-        }
-        self.image = placeHolder
-        
-        if let url = URL(string: URLString) {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    return
-                }
-                if httpResponse.statusCode == 200 {
-                    
-                    if let data = data {
-                        if let downloadedImage = UIImage(data: data) {
-                            imageCache.setObject(downloadedImage, forKey: NSString(string: URLString))
-                            DispatchQueue.main.async {
-                                self.image = downloadedImage
-                                completion(true)
+        }else{
+            self.image = placeHolder
+            if let url = URL(string: URLString) {
+                URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                    if(error == nil){
+                        guard let httpResponse = response as? HTTPURLResponse else {
+                            return
+                        }
+                        if httpResponse.statusCode == 200 {
+                            
+                            if let data = data {
+                                if let downloadedImage = UIImage(data: data) {
+                                    imageCache.setObject(downloadedImage, forKey: NSString(string: URLString))
+                                    DispatchQueue.main.async {
+                                        self.image = downloadedImage
+                                        completion(true)
+                                    }
+                                }
                             }
                         }
-                    }
-                } else {
-                    DispatchQueue.main.sync {
+                        else {
+                            DispatchQueue.main.sync {
+                                self.image = placeHolder
+                                completion(false)
+                            }
+                        }}else{
+                        DispatchQueue.main.async {
+                            self.image = placeHolder
+                            completion(false)
+                        }          }
+                }).resume()
+            } else {
+                DispatchQueue.main.async {
                     self.image = placeHolder
-                    }
+                    completion(false)
                 }
-            }).resume()
-        } else {
-            
-            self.image = placeHolder
+            }
         }
     }
 }
