@@ -11,35 +11,29 @@ import UIKit
 class DashboardViewController: UIViewController {
 
     var tblDashboardView   = UITableView.init(frame: CGRect.zero, style: UITableView.Style.grouped)
-    var lblNoData = UILabel()
     var dashboardData: DashboardModel?
     var dashboardViewModels = [DashboardViewModel]()
-    private let refreshDashboard = UIRefreshControl()
     var indicator = UIActivityIndicatorView()
 
-    
-    //MARK:- setupDashboardactivityIndicator
-       func activityIndicator() {
+// MARK: setupDashboardactivityIndicator
+    func activityIndicator() {
            indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
            indicator.style = UIActivityIndicatorView.Style.medium
            indicator.center = self.view.center
            self.view.addSubview(indicator)
        }
-       
-       //MARK: startAnimating
+// MARK: startAnimating
        func startAnimating() {
            activityIndicator()
            indicator.startAnimating()
            indicator.backgroundColor = .white
        }
-       
-       //MARK: stopAnimating
+// MARK: stopAnimating
        func stopAnimating() {
            indicator.stopAnimating()
            indicator.hidesWhenStopped = true
        }
-    
-    //MARK:- viewDidLoad
+// MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -54,28 +48,23 @@ class DashboardViewController: UIViewController {
         self.setupDashboardTableView()
         // Do any additional setup after loading the view.
     }
-    
-    func isNetworkAvailable()
-    {
-        if Reachability.isConnectedToNetwork(){
+    func isNetworkAvailable() {
+        //To check network connectivity
+        if Reachability.isConnectedToNetwork() {
             print("Internet Connection Available!")
-        }else{
+        } else {
             self.showAlert("Error","Internet Not Available", "Dismiss")
-
         }
     }
-    
-    
     func getLoadedData() {
-        if Reachability.isConnectedToNetwork(){
+        //Getting data from service manager
+        if Reachability.isConnectedToNetwork() {
                    print("Internet Connection Available!")
-               
         ServiceManager.sharedInstance.getData(baseURL: Constants.ConfigurationItems.serverURL, onSuccess: { data in
             DispatchQueue.main.async {
                 do {
                     let jsonDecoder = JSONDecoder()
                     self.dashboardData = try jsonDecoder.decode(DashboardModel.self, from: data)
-               
                     self.dashboardViewModels = self.convertJsonzToViewModelArray(dashboardItems: (self.dashboardData?.rowValue)!)
                     DispatchQueue.main.async {
                         self.navigationItem.title =  self.dashboardData?.titleValue
@@ -89,12 +78,20 @@ class DashboardViewController: UIViewController {
         }, onFailure: { error in
             self.showAlert("Error", error.localizedDescription,"Dismiss")
         })
-            }else{
-                       self.showAlert("Error","Internet Not Available", "Dismiss")
-
+            } else { self.showAlert("Error","Internet Not Available", "Dismiss")
                    }
+}
+    func convertJsonzToViewModelArray(dashboardItems:[DashboardDetailsModel]) -> [DashboardViewModel] {
+        var dashboardViewModelItems = [DashboardViewModel]()
+        for dashboardItem in dashboardItems {
+            let dashViewModel = DashboardViewModel(model:(dashboardItem))
+            if !(dashViewModel.title).isEmpty {
+                dashboardViewModelItems.append(dashViewModel)
+            }
+        }
+        return dashboardViewModelItems
     }
-   //MARK:- Common UIAlertView
+// MARK: Common UIAlertView
    func showAlert(_ title: String, _ message: String, _ buttonTitle: String) {
        let alert = UIAlertController(title: "Alert",
                                      message: message,
@@ -104,17 +101,15 @@ class DashboardViewController: UIViewController {
                                      handler: nil))
        self.present(alert, animated: true, completion: nil)
    }
-  //MARK:- refreshDashboardData for UIRefreshControl
+// MARK: refreshDashboardData for UIRefreshControl
     @objc private func refreshUpdateData(_ sender: Any) {
            getLoadedData()
            tblDashboardView.endRefreshing(deadline: .now() + .seconds(3))
        }
-       
-       //MARK:- refreshData for Refresh ButtonAction
+// MARK: refreshData for Refresh ButtonAction
     @objc func refreshData(_ refreshControl: UIRefreshControl) {
            tblDashboardView.pullAndRefresh()
        }
-    
     func setupDashboardTableView() {
         tblDashboardView = UITableView()
         tblDashboardView.translatesAutoresizingMaskIntoConstraints = false
@@ -122,13 +117,6 @@ class DashboardViewController: UIViewController {
         tblDashboardView.delegate = self
         tblDashboardView.backgroundColor = UIColor.clear
         tblDashboardView.register(DashboardTableViewCell.self, forCellReuseIdentifier:Constants.ConfigurationItems.cellIdentifier)
-        lblNoData = UILabel(frame:
-            CGRect(x: 0, y: 0, width: tblDashboardView.bounds.size.width, height:tblDashboardView.bounds.size.height))
-        lblNoData.text = Constants.ConfigurationItems.noDataText
-        lblNoData.textColor = UIColor.black
-        lblNoData.textAlignment = .center
-        lblNoData.isHidden = true
-        tblDashboardView.backgroundView = lblNoData
         tblDashboardView.separatorStyle = .none
         tblDashboardView.rowHeight = UITableView.automaticDimension
         tblDashboardView.estimatedRowHeight = UITableView.automaticDimension
@@ -146,84 +134,8 @@ class DashboardViewController: UIViewController {
     }
 
 }
-
-
-extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
-    
-    //MARK: tableview : numberOfSections
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    //MARK: tableview : numberOfRowsInSection
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return  self.dashboardViewModels.count
-    }
-    
-    //MARK: tableview : cellForRowAtIndexPath
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //table view cell
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ConfigurationItems.cellIdentifier,
-                                                         for: indexPath) as? DashboardTableViewCell else {
-               // you can have your custom error
-               // return the default cell as method return expect it
-               return UITableViewCell()
-        }
-        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        cell.selectionStyle = .none
-
-        cell.displayDataInCell(using: self.dashboardViewModels[indexPath.row])
-        return cell
-    }
-    
-    func convertJsonzToViewModelArray(dashboardItems:[DashboardDetailsModel]) -> [DashboardViewModel] {
-        var dashboardViewModelItems = [DashboardViewModel]()
-        for dashboardItem in dashboardItems {
-            let dashViewModel = DashboardViewModel(model:(dashboardItem))
-            if !(dashViewModel.title).isEmpty
-            {
-                dashboardViewModelItems.append(dashViewModel)
-            }
-        }
-        return dashboardViewModelItems
-    }
-    
-    //MARK: tableview - heightForRowAt
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      
-            return UITableView.automaticDimension
-    }
-    
-    //MARK: tableview - didSelectRowAt
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //toggleRows
-    }
-    
-    //MARK: tableview - calculateHeight of Cell
-    func calculateHeight(inString:String) -> CGFloat {
-        let message = inString
-        let attributes = NSDictionary.init(object: UIFont.systemFont(ofSize:CGFloat(Constants.ConfigurationItems.txtSize)),
-                                           forKey:NSAttributedString.Key.font as NSCopying)
-        
-        let attributedString : NSAttributedString = NSAttributedString(string: message,
-                                                                       attributes:
-            attributes as? [NSAttributedString.Key : Any])
-        
-        let rect : CGRect = attributedString.boundingRect(with:
-            CGSize(width: 222.0,
-                   height: CGFloat.greatestFiniteMagnitude),
-                                                          options: .usesLineFragmentOrigin,
-                                                          context: nil)
-        
-        let requredSize:CGRect = rect
-        return requredSize.height
-    }
-}
-
-//MARK:- tableview - for RefreshControl
+// MARK: tableview - for RefreshControl
 public extension UITableView {
-
     private var myRefreshControl: DashboardRefreshControl? { return refreshControl as? DashboardRefreshControl }
 
     func addRefreshControll(actionTarget: AnyObject?, action: Selector, replaceIfExist: Bool = false) {

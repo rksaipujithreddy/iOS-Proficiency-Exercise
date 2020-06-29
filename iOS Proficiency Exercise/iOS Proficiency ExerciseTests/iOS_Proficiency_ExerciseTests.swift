@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import iOS_Proficiency_Exercise
+@testable import iOSProficiencyExercise
 
 class iOS_Proficiency_ExerciseTests: XCTestCase {
 
