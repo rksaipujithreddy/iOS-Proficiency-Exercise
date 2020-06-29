@@ -203,7 +203,7 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
     //MARK: tableview - calculateHeight of Cell
     func calculateHeight(inString:String) -> CGFloat {
         let message = inString
-        let attributes = NSDictionary.init(object: UIFont.systemFont(ofSize: 15.0),
+        let attributes = NSDictionary.init(object: UIFont.systemFont(ofSize:CGFloat(Constants.ConfigurationItems.txtSize)),
                                            forKey:NSAttributedString.Key.font as NSCopying)
         
         let attributedString : NSAttributedString = NSAttributedString(string: message,

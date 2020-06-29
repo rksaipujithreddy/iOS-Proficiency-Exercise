@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A9333B1B24A6DE92006D301B /* ImageCachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9333B1A24A6DE92006D301B /* ImageCachable.swift */; };
 		A9333B1D24A73641006D301B /* DashboardRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9333B1C24A73641006D301B /* DashboardRefreshControl.swift */; };
 		A9333B1F24A76E1F006D301B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9333B1E24A76E1F006D301B /* Reachability.swift */; };
+		A9333B2224A90A68006D301B /* ImageCachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9333B1A24A6DE92006D301B /* ImageCachable.swift */; };
 		A993B86124A6342300A7493D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86024A6342300A7493D /* AppDelegate.swift */; };
 		A993B86324A6342300A7493D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86224A6342300A7493D /* SceneDelegate.swift */; };
 		A993B86524A6342300A7493D /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993B86424A6342300A7493D /* DashboardViewController.swift */; };
@@ -90,14 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A9333B1924A6DE7B006D301B /* Utilities */ = {
+		A9333B1924A6DE7B006D301B /* UtilitieFiiles */ = {
 			isa = PBXGroup;
 			children = (
 				A9333B1A24A6DE92006D301B /* ImageCachable.swift */,
 				A9333B1C24A73641006D301B /* DashboardRefreshControl.swift */,
 				A9333B1E24A76E1F006D301B /* Reachability.swift */,
 			);
-			path = Utilities;
+			path = UtilitieFiiles;
 			sourceTree = "<group>";
 		};
 		A993B85424A6342300A7493D = {
@@ -123,7 +123,7 @@
 		A993B85F24A6342300A7493D /* iOS Proficiency Exercise */ = {
 			isa = PBXGroup;
 			children = (
-				A9333B1924A6DE7B006D301B /* Utilities */,
+				A9333B1924A6DE7B006D301B /* UtilitieFiiles */,
 				A993B89B24A65C0800A7493D /* Constants */,
 				A993B89A24A65BF800A7493D /* Service */,
 				A993B89724A65A8400A7493D /* Model */,
@@ -330,8 +330,8 @@
 				A993B89F24A65EE700A7493D /* DashboardModel.swift in Sources */,
 				A993B89924A65B0200A7493D /* ServiceManager.swift in Sources */,
 				A993B86524A6342300A7493D /* DashboardViewController.swift in Sources */,
+				A9333B2224A90A68006D301B /* ImageCachable.swift in Sources */,
 				A993B8A124A6617300A7493D /* DashboardViewModel.swift in Sources */,
-				A9333B1B24A6DE92006D301B /* ImageCachable.swift in Sources */,
 				A993B86124A6342300A7493D /* AppDelegate.swift in Sources */,
 				A9333B1D24A73641006D301B /* DashboardRefreshControl.swift in Sources */,
 				A9333B1F24A76E1F006D301B /* Reachability.swift in Sources */,
