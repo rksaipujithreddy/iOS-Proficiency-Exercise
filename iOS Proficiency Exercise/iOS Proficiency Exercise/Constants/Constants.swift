@@ -14,5 +14,8 @@ struct ConfigurationItems {
       static let serverURL      = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
       static let cellIdentifier = "DashboardTableViewCell"
       static let noDataText     = "No data found!"
+      static let constant       = 125.0
+      static let txtSize        = 15
+
     }
 }
