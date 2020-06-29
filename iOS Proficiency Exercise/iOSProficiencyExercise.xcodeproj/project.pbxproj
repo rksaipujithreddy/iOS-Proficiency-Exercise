@@ -733,9 +733,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.companyname.Aps.Com.iOS-Proficiency-ExerciseUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iOS Proficiency Exercise";
+				TEST_TARGET_NAME = iOSProficiencyExercise;
 			};
 			name = Debug;
 		};
@@ -754,9 +755,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.companyname.Aps.Com.iOS-Proficiency-ExerciseUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "iOS Proficiency Exercise";
+				TEST_TARGET_NAME = iOSProficiencyExercise;
 			};
 			name = Release;
 		};

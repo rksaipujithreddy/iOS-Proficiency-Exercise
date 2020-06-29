@@ -42,6 +42,8 @@ class DashboardViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(self.refreshData))
+        tblDashboardView.isAccessibilityElement = true
+        tblDashboardView.accessibilityIdentifier = "TestTableView"
         isNetworkAvailable()
         activityIndicator()
         self.getLoadedData()

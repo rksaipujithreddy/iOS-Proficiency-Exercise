@@ -31,6 +31,23 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
         cell.selectionStyle = .none
 
         cell.displayDataInCell(using: self.dashboardViewModels[indexPath.row])
+        
+        cell.isAccessibilityElement = true
+        cell.accessibilityIdentifier = String(format: "dtTVC_%d_%d",
+        indexPath.section, indexPath.row)
+        
+        cell.lblTitle.isAccessibilityElement = true
+        cell.lblTitle.accessibilityIdentifier = String(format: "TitleLabel",
+        indexPath.section, indexPath.row)
+        cell.lblDescription.isAccessibilityElement = true
+        cell.lblDescription.accessibilityIdentifier = String(format: "DescriptionLabel",
+              indexPath.section, indexPath.row)
+        cell.imgDisplay.isAccessibilityElement = true
+        cell.imgDisplay.accessibilityIdentifier = String(format: "callActionImage",
+                    indexPath.section, indexPath.row)
+        cell.viewCellBg.isAccessibilityElement = true
+        cell.viewCellBg.accessibilityIdentifier = String(format: "callBGImage",
+                           indexPath.section, indexPath.row)
         return cell
     }
 
