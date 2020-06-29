@@ -60,6 +60,7 @@ class DashboardViewController: UIViewController {
         //Getting data from service manager
         if Reachability.isConnectedToNetwork() {
                    print("Internet Connection Available!")
+         if(!Constants.ConfigurationItems.serverURL.isEmpty){
         ServiceManager.sharedInstance.getData(baseURL: Constants.ConfigurationItems.serverURL, onSuccess: { data in
             DispatchQueue.main.async {
                 do {
@@ -78,8 +79,11 @@ class DashboardViewController: UIViewController {
         }, onFailure: { error in
             self.showAlert("Error", error.localizedDescription,"Dismiss")
         })
-            } else { self.showAlert("Error","Internet Not Available", "Dismiss")
-                   }
+         }else {
+             self.showAlert("Error","URL Not Available", "Dismiss")
+            }}
+        else { self.showAlert("Error","Internet Not Available", "Dismiss")
+        }
 }
     func convertJsonzToViewModelArray(dashboardItems:[DashboardDetailsModel]) -> [DashboardViewModel] {
         var dashboardViewModelItems = [DashboardViewModel]()
