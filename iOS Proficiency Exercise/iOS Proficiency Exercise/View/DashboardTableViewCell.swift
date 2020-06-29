@@ -12,8 +12,9 @@ class DashboardTableViewCell: UITableViewCell {
     
     var imageWidthAnchor:NSLayoutConstraint!
     var imageHeightAnchor:NSLayoutConstraint!
-
-     lazy var viewCellBg: UIView = {
+    var titleHeightAnchor:NSLayoutConstraint!
+    
+    lazy var viewCellBg: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -27,9 +28,9 @@ class DashboardTableViewCell: UITableViewCell {
         view.layer.borderWidth = 1
         return view
     }()
-     lazy var lblTitle: UILabel = {
+    lazy var lblTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize:CGFloat(Constants.ConfigurationItems.txtSize))
         label.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
         label.numberOfLines = 0
         label.backgroundColor =  UIColor.clear
@@ -38,7 +39,7 @@ class DashboardTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-     lazy var imgDisplay: UIImageView = {
+    lazy var imgDisplay: UIImageView = {
         let img = UIImageView()
         img.backgroundColor = UIColor.clear
         img.contentMode = .scaleAspectFit // without this your image will shrink and looks ugly
@@ -46,7 +47,7 @@ class DashboardTableViewCell: UITableViewCell {
         img.clipsToBounds = true
         return img
     }()
-     lazy var lblDescription: UILabel = {
+    lazy var lblDescription: UILabel = {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
         label.numberOfLines = 0
@@ -68,31 +69,27 @@ class DashboardTableViewCell: UITableViewCell {
             viewCellBg.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor,constant: -8),
             viewCellBg.bottomAnchor.constraint(equalTo:self.contentView.bottomAnchor,constant: -8)
         ])
-        
-        let constantWH = (self.contentView.frame.size.width/4)
-        
-        
+                
         viewCellBg.addSubview(imgDisplay)
         viewCellBg.addSubview(lblTitle)
         viewCellBg.addSubview(lblDescription)
         NSLayoutConstraint.activate([
             
             imgDisplay.leftAnchor.constraint(equalTo: viewCellBg.leftAnchor, constant:20 ),
-            imgDisplay.centerYAnchor.constraint(equalTo:lblTitle.centerYAnchor)
+            imgDisplay.topAnchor.constraint(equalTo:viewCellBg.topAnchor,constant: 10),
+            
         ])
-            self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: constantWH)
-            self.imageWidthAnchor.isActive = true
-        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant: constantWH)
+        self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: CGFloat(Constants.ConfigurationItems.constant))
+        self.imageWidthAnchor.isActive = true
+        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant: CGFloat(Constants.ConfigurationItems.constant))
         self.imageHeightAnchor.isActive = true
         
         NSLayoutConstraint.activate([
             lblTitle.leadingAnchor.constraint(equalTo:imgDisplay.trailingAnchor,constant:-10),
             lblTitle.topAnchor.constraint(equalTo:viewCellBg.topAnchor,constant: 10),
             lblTitle.trailingAnchor.constraint(equalTo:viewCellBg.trailingAnchor),
-            lblTitle.heightAnchor.constraint(equalToConstant:constantWH)
+lblTitle.heightAnchor.constraint(equalToConstant:CGFloat(Constants.ConfigurationItems.constant))
         ])
-        
-        
         
         NSLayoutConstraint.activate([
             lblDescription.topAnchor.constraint(equalTo:lblTitle.bottomAnchor,constant: 20),
@@ -116,37 +113,30 @@ class DashboardTableViewCell: UITableViewCell {
     func  displayDataInCell(using viewModel: DashboardViewModel) {
         lblTitle.text = viewModel.title
         lblDescription.text = viewModel.description
-        imageWidthAnchor.isActive = false
+        imageWidthAnchor.isActive  = false
         imageHeightAnchor.isActive = false
-
+        
         if(!viewModel.imageURL.isEmpty){
             imgDisplay.loadImageUsingCacheWithURLString(viewModel.imageURL, placeHolder: nil) { (bool) in
-                       print(bool)
                 if(bool){
-                    DispatchQueue.main.async {
-                    self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: (self.contentView.frame.size.width/4))
-                      self.imageWidthAnchor.isActive = true
-                        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant: (self.contentView.frame.size.width/4))
-                          self.imageHeightAnchor.isActive = true
-                    }
+                    self.updateContraintsWith(constant: CGFloat(Constants.ConfigurationItems.constant))
                 }else{
-                    DispatchQueue.main.async {
-                    self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: 0)
-                    self.imageWidthAnchor.isActive = true
-                        self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant:0)
-                        self.imageHeightAnchor.isActive = true
-                    }
-                    
+                    self.updateContraintsWith(constant: 0)
                 }
-                   }            
-        }
-        else{
-            DispatchQueue.main.async {
-                self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: 0)
-                self.imageWidthAnchor.isActive = true
-                self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant:0)
-                self.imageHeightAnchor.isActive = true
             }
         }
+        else{
+            self.updateContraintsWith(constant: 0)
+        }
     }
+    
+    func updateContraintsWith(constant :CGFloat)  {
+        DispatchQueue.main.async {
+            self.imageWidthAnchor =  self.imgDisplay.widthAnchor.constraint(equalToConstant: constant)
+            self.imageWidthAnchor.isActive = true
+            self.imageHeightAnchor =  self.imgDisplay.heightAnchor.constraint(equalToConstant: constant)
+            self.imageHeightAnchor.isActive = true
+        }
+    }
+    
 }

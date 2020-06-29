@@ -29,7 +29,7 @@ extension ImageCachable where Self: UIImageView {
         if let cachedImage = imageCache.object(forKey: NSString(string: URLString)) {
             DispatchQueue.main.async {
                 self.image = cachedImage
-                completion(true)
+                completion(true)//Image exists then returning true
             }
             return
         }else{
@@ -55,7 +55,7 @@ extension ImageCachable where Self: UIImageView {
                         else {
                             DispatchQueue.main.sync {
                                 self.image = placeHolder
-                                completion(false)
+                                completion(false)//If Image doesnt exists then returning false
                             }
                         }}else{
                         DispatchQueue.main.async {
