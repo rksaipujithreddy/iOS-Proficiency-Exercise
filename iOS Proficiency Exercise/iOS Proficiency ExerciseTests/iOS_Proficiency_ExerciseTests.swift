@@ -67,7 +67,37 @@ class iOS_Proficiency_ExerciseTests: XCTestCase {
         XCTAssertNotNil(mainViewController.tblDashboardView.delegate, "Table delegate cannot be nil")
     }
      
-  
+
+
+      func test_numberOfRowsAreTheCountriesCount() {
+        
+        let json = """
+                 {
+                 "title":"About Canada",
+                 "rows":[
+                     {
+                     "title":"Beavers",
+                     "description":"Beavers are second only to humans in their ability to manipulate and change their environment. They can measure up to 1.3 metres long. A group of beavers is called a colony",
+                     "imageHref":"http://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/220px-American_Beaver.jpg"
+                     }
+                       ]
+                   }
+                 """.data(using: .utf8)!
+           
+                 let person = try! JSONDecoder().decode(DashboardModel.self, from: json)
+
+        let detailedModel = person.rowValue!
+        let detailsArray =    mainViewController.convertJsonzToViewModelArray(dashboardItems: detailedModel)
+        
+        let sut = DashboardDataSource(data:detailsArray)
+
+             let tablewView = UITableView()
+             tablewView.dataSource = sut
+             
+             let numberOfRows = tablewView.numberOfRows(inSection: 0)
+             
+             XCTAssertEqual(detailsArray.count, numberOfRows)
+      }
     
     func testTableViewNumberOfRowsInSection() {
         
@@ -197,3 +227,37 @@ class iOS_Proficiency_ExerciseTests: XCTestCase {
           XCTAssertEqual(person.rowValue?[0].imageReferenceValue, nil)
     }
 }
+
+
+class DashboardDataSource: NSObject, UITableViewDataSource {
+ 
+    private let data: [DashboardViewModel]
+       
+       init(data: [DashboardViewModel]) {
+           self.data = data
+           super.init()
+       }
+       
+       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+           return data.count
+       }
+       
+       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+           return UITableViewCell()
+       }
+    
+}
+
+class DashboardDataViewController: DashboardViewController {
+    
+     @IBOutlet weak var tableView: UITableView!
+       var dataSource: DashboardDataSource!
+       
+       override func viewDidLoad() {
+           super.viewDidLoad()
+           
+           tableView.dataSource = dataSource
+       }
+    
+}
+

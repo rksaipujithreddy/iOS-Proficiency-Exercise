@@ -42,6 +42,10 @@ class DashboardViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(self.refreshData))
+        
+        //UITestCaseSupport
+        navigationItem.rightBarButtonItem?.isAccessibilityElement = true
+        navigationItem.rightBarButtonItem?.accessibilityLabel = "TestNavView"
         tblDashboardView.isAccessibilityElement = true
         tblDashboardView.accessibilityIdentifier = "TestTableView"
         isNetworkAvailable()

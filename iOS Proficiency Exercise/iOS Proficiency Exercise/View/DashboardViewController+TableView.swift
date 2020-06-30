@@ -31,11 +31,10 @@ extension DashboardViewController: UITableViewDelegate,UITableViewDataSource {
         cell.selectionStyle = .none
 
         cell.displayDataInCell(using: self.dashboardViewModels[indexPath.row])
-        
+        //UITestCaseSupport
         cell.isAccessibilityElement = true
         cell.accessibilityIdentifier = String(format: "dtTVC_%d_%d",
         indexPath.section, indexPath.row)
-        
         cell.lblTitle.isAccessibilityElement = true
         cell.lblTitle.accessibilityIdentifier = String(format: "TitleLabel",
         indexPath.section, indexPath.row)

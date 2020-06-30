@@ -44,12 +44,11 @@ class iOS_Proficiency_ExerciseUITests: XCTestCase {
         XCTAssertTrue(callImageView.exists, "Image view not exist.")
         let callBGImageView = app.otherElements.containing(.image, identifier: "callBGImage").firstMatch
         XCTAssertTrue(callBGImageView.exists, "BG Image view not exist.")
+        let navView = XCUIApplication().buttons["TestNavView"]
+        XCTAssertTrue(navView.exists, "Nav bar not exist.")
     }
     
-    private func checkForImageViewExistence() {
-        
-
-    }
+  
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
