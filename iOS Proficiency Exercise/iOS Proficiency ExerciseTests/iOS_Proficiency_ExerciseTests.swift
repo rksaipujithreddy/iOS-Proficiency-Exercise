@@ -28,6 +28,73 @@ class iOS_Proficiency_ExerciseTests: XCTestCase {
     }
 
     
+    // MARK:  View loading tests
+
+    func testThatViewLoads()
+    {
+        XCTAssertNotNil(mainViewController.view, "View not initiated properly");
+    }
+     
+    func testParentViewHasTableViewSubview()
+    {
+        let subviews = mainViewController.view.subviews
+        XCTAssertTrue(subviews.contains(mainViewController.tblDashboardView), "View does not have a table subview")
+    }
+     
+    func testThatTableViewLoads()
+    {
+        XCTAssertNotNil(mainViewController.tblDashboardView,"TableView not initiated")
+    }
+
+    // MARK:  - UITableView tests
+    func testThatViewConformsToUITableViewDataSource()
+    {
+        XCTAssertTrue(mainViewController.conforms(to:UITableViewDataSource.self),"View does not conform to UITableView datasource protocol")
+    }
+     
+    func testThatTableViewHasDataSource()
+    {
+        XCTAssertNotNil(mainViewController.tblDashboardView.dataSource,"Table datasource cannot be nil")
+    }
+     
+    func testThatViewConformsToUITableViewDelegate()
+    {
+     XCTAssertTrue(mainViewController.conforms(to:UITableViewDelegate.self),"View does not conform to UITableView datasource protocol")
+    }
+     
+    func testTableViewIsConnectedToDelegate()
+    {
+        XCTAssertNotNil(mainViewController.tblDashboardView.delegate, "Table delegate cannot be nil")
+    }
+     
+  
+    
+    func testTableViewNumberOfRowsInSection() {
+        
+        
+        let json = """
+                 {
+                 "title":"About Canada",
+                 "rows":[
+                     {
+                     "title":"Beavers",
+                     "description":"Beavers are second only to humans in their ability to manipulate and change their environment. They can measure up to 1.3 metres long. A group of beavers is called a colony",
+                     "imageHref":"http://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/220px-American_Beaver.jpg"
+                     }
+                       ]
+                   }
+                 """.data(using: .utf8)!
+           
+                 let person = try! JSONDecoder().decode(DashboardModel.self, from: json)
+
+        let detailedModel = person.rowValue!
+        _ =    mainViewController.convertJsonzToViewModelArray(dashboardItems: detailedModel)
+        let expectedRows = mainViewController.dashboardViewModels.count
+       XCTAssertTrue(mainViewController.tblDashboardView.numberOfRows(inSection: 0) == expectedRows,"Table has %d rows but it should have %d")
+    }
+    
+
+    
     func testInternet() {
 
         
